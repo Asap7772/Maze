@@ -1,9 +1,6 @@
-OP|PPPP
-|PPP|PP
-||||||P
-|||||PP
-||||||P
-PPPPPPP
-PPP||||
-||PP|||
-|||PPPX
+000BBB
+B0B000
+000000
+BBB00B
+BB00BB
+BBB000
