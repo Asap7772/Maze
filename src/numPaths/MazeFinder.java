@@ -1,6 +1,5 @@
 package numPaths;
 
-import java.util.ArrayList;
 
 /** Programming Challenge: Maze Route Finder
  * @author anikaitsingh
@@ -8,136 +7,52 @@ import java.util.ArrayList;
 
 public class MazeFinder {
 	
-	private static ArrayList<Coordinate> path = new ArrayList<Coordinate>(); //has the list of coordinates one must follow
-	//finds the beginning and ending point
-	public static Coordinate[] findStartAndFinish(char[][] arr, char start, char finish){
-		Coordinate Start = null, Finish = null, a[];
-		for(int i = 0; i< arr.length; i++){
-			for(int j = 0; j< arr[0].length; j++){
-				if(arr[i][j] == start){
-					Start = new Coordinate(i,j);
-				}
-				if(arr[i][j] == finish){
-					Finish = new Coordinate(i,j);
-				}
-			}
-		}
-		a = new Coordinate[2];
-		a[0] = Start;
-		a[1] = Finish;
-		return a;
+	private final int START_R;
+	private final int START_C;
+	private final int END_R;
+	private final int END_C;
+	private final char[][] MAZE;
+	
+	
+	public MazeFinder(char[][] arr){
+		this(arr, 0, 0, arr.length-1, arr[0].length-1);
 	}
 	
-	
-	//is called by coordinator
-	public static ArrayList<Coordinate> findPath(char[][] arr){
-		Coordinate[] beg = findStartAndFinish(arr, 'O', 'X');
-		return initFind(arr, beg[0].getX(), beg[0].getY(), beg[1].getX(), beg[1].getY());
+	public MazeFinder(char[][] arr, int sR, int sC, int eR, int eC){
+		MAZE = arr;
+		this.START_R = sR;
+		this.START_C = sC;
+		this.END_R = eR;
+		this.END_C = eC;
 	}
-	
-	
-	//initializes the find and finishes it up
-	public static ArrayList<Coordinate> initFind(char[][] arr,int x1, int y1, int x2, int y2){
-		findASolution(arr, x1,y1,x2,y2);
-		return path;
-	}
-	
-	
-	//finds a possible path
-	public static boolean findASolution(char[][] arr, int x1, int y1, int x2, int y2){
-		if(arr[x1][y1] == '|'){
-			return false;
-		}
 		
-		if(arr[x1][y1] != 'O'){
-			arr[x1][y1] = '1';
-		}
-		
-		path.add(new Coordinate(x1,y1));
-		
-		if(x1+1 < arr.length){
-			if (arr[x1+1][y1] == 'P'){
-				if(findASolution(arr, x1 + 1, y1, x2, y2)){
-					return true;
-				}
-			}
-			if(arr[x1+1][y1] == 'X'){
-				path.add(new Coordinate(y1,x1+1));
-				return true;
-			}
-		}
-		if(y1+1 < arr[0].length){
-			if (arr[x1][y1+1] == 'P'){
-				if(findASolution(arr, x1, y1+1, x2, y2)){
-					return true;
-			}
-			}
-			if(arr[x1][y1+1] == 'X'){
-				path.add(new Coordinate(y1+1,x1));
-				return true;
-			}
-		}
-		if(x1-1 >= 0){
-			if (arr[x1-1][y1] == 'P'){
-				if(findASolution(arr, x1 - 1, y1, x2, y2)){
-					return true;
-				}
-			}
-			if(arr[x1-1][y1] == 'X'){
-				path.add(new Coordinate(y1, x1-1));
-				return true;
-			}
-		}
-		if(y1-1 >= 0){
-			if (arr[x1][y1-1] != 'O'){
-				if(findASolution(arr, x1, y1-1, x2, y2)){
-					return true;
-			}
-			}
-			if(arr[x1][y1-1] == 'X'){
-				path.add(new Coordinate(y1-1,x1));
-				return true;
-			}
-		}
-		return false;
+	public int numPaths(){
+		return numPaths(START_R, START_C, END_R, END_C);
 	}
-}
+	
+	public int numPaths(int sx, int sy, int ex, int ey){
+		return 0;		
+	}
 
+	public int getStartRow() {
+		return START_R;
+	}
 
-/*
- * internal class which stores an x and a y value and is used to pass that efficiently
- */
-class Coordinate{
-	private int x, y;	
-	
-	public Coordinate(int _x, int _y){
-		x = _x;
-		y = _y;
+	public int getStartCollumn() {
+		return START_C;
+	}
+
+	public int getEndRow() {
+		return END_R;
+	}
+
+	public int getEndCollumn() {
+		return END_C;
+	}
+
+	public char[][] getMaze() {
+		return MAZE;
 	}
 	
-	
-	public void setX(int _x){
-		x = _x;
-	}
-	
-	
-	public void setY(int _y){
-		y = _y;
-	}
-	
-	
-	public double getDistance(Coordinate c){
-		return (Math.sqrt( Math.pow((x - c.getX()),2) + Math.pow((y - c.getY()),2) ));
-	}
-	
-	
-	public int getX(){
-		return x;
-	}
-	
-	
-	public int getY(){
-		return y;
-	}
 }
 

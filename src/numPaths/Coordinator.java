@@ -41,8 +41,9 @@ public class Coordinator {
 		}
 		
 		print2DCharArray(arr);
-		//maze finding algorithm
-		printCoordinateArray(MazeFinder.findPath(arr));
+		//maze number of paths — algorithm
+		MazeFinder maze = new MazeFinder(arr);
+		System.out.println("The number of paths in this array are: " + maze.numPaths());
 	}
 	
 	
@@ -58,12 +59,5 @@ public class Coordinator {
 	}
 	
 	
-	//prints a single dimensional Coordinate array
-	public static void printCoordinateArray(ArrayList<Coordinate> arr){
-		Coordinate coord;
-		for(int i = 0; i < arr.size(); i++){
-			coord = arr.get(i);
-			System.out.println("(" + coord.getX() + "," + coord.getY() + ")");
-		}
-	}
+	
 }
