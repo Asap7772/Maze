@@ -30,8 +30,17 @@ public class MazeFinder {
 		return numPaths(START_R, START_C, END_R, END_C);
 	}
 	
-	public int numPaths(int sx, int sy, int ex, int ey){
-		return 0;		
+	public int numPaths(int sR, int sC, int eR, int eC){
+		if(!isValidSquare(sR, sC)){
+			return 0;
+		}else if(sR == eR && sC == eC){
+			return 0;
+		}
+		return numPaths(sR + 1, sC, eR, eC) + numPaths(sR, sC + 1, eR, eC);		
+	}
+	
+	public boolean isValidSquare(int r, int c){
+		return !(r< MAZE.length && c< MAZE[0].length) || this.MAZE[r][c] != 'B';
 	}
 
 	public int getStartRow() {
